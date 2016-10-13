@@ -32,3 +32,5 @@ vignettes/*.pdf
 *.utf8.md
 *.knit.md
 00-fetch-fastq.sh
+09-cuffquant.sh
+cuffquant.sh
