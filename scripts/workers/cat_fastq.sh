@@ -26,8 +26,6 @@ else
   exit 1
 fi
 
-set -x
-
 cd $SORTNMG_DIR
 
 echo Concatenating fastq\'s for sample $SAMPLE
