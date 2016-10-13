@@ -1,5 +1,6 @@
 export CWD=$PWD
 export SCRIPT_DIR=$CWD
+export WORKER_DIR="$SCRIPT_DIR/workers"
 #where programs are
 export BIN_DIR="/rsgrps/bhurwitz/hurwitzlab/bin"
 #root project dir
