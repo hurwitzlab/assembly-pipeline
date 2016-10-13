@@ -1,0 +1,11 @@
+/rsgrps/bhurwitz/scottdaniel/fastq-taxoner-patric/sort-and-merged
+
+has the .fastq's that have been QC'ed and filtered for host / host food genomes
+
+first we will collapse them into sample groups (e.g. DNA_1, DNA_2)
+second we will remove duplicates (with 'fastq filter' program)
+third we will filter out reads with low-abundance kmers (with khmer program)
+fourth we will assemble each sample individually
+fifth we will run QC on each assembly
+sixth we will assemble the samples together
+7th we will run QC on that co-assembly
