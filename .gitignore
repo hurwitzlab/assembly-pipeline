@@ -35,3 +35,4 @@ vignettes/*.pdf
 09-cuffquant.sh
 cuffquant.sh
 grouped/
+out/
