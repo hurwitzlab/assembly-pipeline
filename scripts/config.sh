@@ -17,6 +17,8 @@ export SORTNMG_DIR="/rsgrps/bhurwitz/scottdaniel/fastq-taxoner-patric/sort-and-m
 
 #place to store merged fastq's by sample
 export GROUPED_DIR="$PRJ_DIR/grouped"
+#place to store deduped fastq's by sample
+export DEDUPED_DIR="$PRJ_DIR/deduped"
 
 # Usefull functions
 # --------------------------------------------------
