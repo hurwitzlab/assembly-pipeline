@@ -34,3 +34,4 @@ vignettes/*.pdf
 00-fetch-fastq.sh
 09-cuffquant.sh
 cuffquant.sh
+grouped/
