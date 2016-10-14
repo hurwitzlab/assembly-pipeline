@@ -34,8 +34,12 @@ echo Doing sample $SAMPLE
 
 set -x
 
-time fastq filter --adjust 64 --unique \
-    $(cat "$SAMPLE".1.fastq "$SAMPLE".2.fastq "$SAMPLE".nomatch.fastq) \
+echo Concatenating all fastqs into temp file
+time cat "$SAMPLE".1.fastq "$SAMPLE".2.fastq "$SAMPLE".nomatch.fastq > "$SAMPLE".temp
+echo Filtering out duplicate reads
+time fastq filter --adjust 64 --unique "$SAMPLE".temp \
     > $DEDUPED_DIR/"$SAMPLE".deduped.fastq
+echo Removing temp file
+rm "$SAMPLE".temp
 
 echo Done at $(date)
