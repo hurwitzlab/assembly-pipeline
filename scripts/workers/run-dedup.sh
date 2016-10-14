@@ -2,10 +2,10 @@
 
 #PBS -W group_list=bhurwitz
 #PBS -q qualified
-#PBS -l select=1:ncpus=1:mem=6gb
+#PBS -l select=1:ncpus=6:mem=36gb
 ###and the amount of time required to run it
-#PBS -l walltime=2:00:00
-#PBS -l cput=2:00:00
+#PBS -l walltime=24:00:00
+#PBS -l cput=24:00:00
 #PBS -M scottdaniel@email.arizona.edu
 #PBS -m bea
 
@@ -31,6 +31,8 @@ cd $GROUPED_DIR
 #export MERGER="$WORKER_DIR/mergeShuffledFastqSeqs.pl"
 
 echo Doing sample $SAMPLE
+
+set -x
 
 time fastq filter --adjust 64 --unique \
     $(cat "$SAMPLE".1.fastq "$SAMPLE".2.fastq "$SAMPLE".nomatch.fastq) \
