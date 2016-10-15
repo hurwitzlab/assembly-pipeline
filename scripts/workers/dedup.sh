@@ -2,10 +2,10 @@
 
 #PBS -W group_list=bhurwitz
 #PBS -q qualified
-#PBS -l select=1:ncpus=6:mem=144gb
+#PBS -l select=1:ncpus=12:mem=72gb
 ###and the amount of time required to run it
-#PBS -l walltime=24:00:00
-#PBS -l cput=24:00:00
+#PBS -l walltime=2:00:00
+#PBS -l cput=2:00:00
 #PBS -M scottdaniel@email.arizona.edu
 #PBS -m bea
 
@@ -34,8 +34,8 @@ echo Doing sample $SAMPLE
 
 #set -x
 
-#echo Concatenating all fastqs into temp file
-#time cat "$SAMPLE".1.fastq "$SAMPLE".2.fastq "$SAMPLE".nomatch.fastq > "$SAMPLE".temp
+echo Concatenating all fastqs into temp file
+time cat "$SAMPLE".1.fastq "$SAMPLE".2.fastq "$SAMPLE".nomatch.fastq > "$SAMPLE".temp
 echo Filtering out duplicate reads
 time fastq filter --adjust 64 --unique "$SAMPLE".temp \
     > $DEDUPED_DIR/"$SAMPLE".deduped.fastq

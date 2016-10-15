@@ -11,12 +11,13 @@ export STEP_SIZE=1
 PROG=`basename $0 ".sh"`
 STDOUT_DIR="$CWD/out/$PROG"
 
-init_dir "$STDOUT_DIR" "$DEDUPED_DIR"
+init_dir "$STDOUT_DIR"
+#init_dir "$DEDUPED_DIR"
 
 cd "$GROUPED_DIR"
 
 #overriding config just this once
-export SAMPLE_NAMES="DNA_4"
+export SAMPLE_NAMES="DNA_1 DNA_2 DNA_3"
 
 for i in $SAMPLE_NAMES; do
     export SAMPLE=$i
