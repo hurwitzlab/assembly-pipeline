@@ -16,7 +16,7 @@ init_dir "$STDOUT_DIR" "$DEDUPED_DIR"
 cd "$GROUPED_DIR"
 
 #overriding config just this once
-export SAMPLE_NAMES="DNA_3 DNA_4"
+export SAMPLE_NAMES="DNA_4"
 
 for i in $SAMPLE_NAMES; do
     export SAMPLE=$i
