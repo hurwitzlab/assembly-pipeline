@@ -19,6 +19,10 @@ export SORTNMG_DIR="/rsgrps/bhurwitz/scottdaniel/fastq-taxoner-patric/sort-and-m
 export GROUPED_DIR="$PRJ_DIR/grouped"
 #place to store deduped fastq's by sample
 export DEDUPED_DIR="$PRJ_DIR/deduped"
+#will store graphs in $DEDUPED_DIR
+
+#place to store read trimmed of low-abundance kmers
+export TRIMMED_DIR="$PRJ_DIR/trimmed"
 
 # Usefull functions
 # --------------------------------------------------
