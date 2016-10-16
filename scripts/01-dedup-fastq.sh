@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Merge *.fastq's by sample before deduplication 
+# deduplication of fastq reads
 #
 
 set -u
