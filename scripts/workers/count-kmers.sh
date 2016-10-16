@@ -32,7 +32,7 @@ echo Doing sample $SAMPLE
 
 set -x
 echo Creating kmer count graph
-time load-into-counting.py -k 21 -M 70gb -T 12 \
+time load-into-counting.py -k 21 -M 70e9 -T 12 \
     "$SAMPLE".graph "$SAMPLE".deduped.fastq
 
 echo Done at $(date)
