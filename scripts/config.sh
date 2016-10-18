@@ -23,6 +23,8 @@ export DEDUPED_DIR="$PRJ_DIR/deduped"
 
 #place to store read trimmed of low-abundance kmers
 export TRIMMED_DIR="$PRJ_DIR/trimmed"
+#place to store gzipped paired-end / single-end reads that are ready for assembly
+export READY_DIR="$PRJ_DIR/ready"
 
 # Usefull functions
 # --------------------------------------------------
