@@ -37,3 +37,4 @@ cuffquant.sh
 grouped/
 out/
 deduped/
+trimmed/

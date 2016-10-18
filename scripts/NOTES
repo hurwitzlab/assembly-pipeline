@@ -5,6 +5,7 @@ has the .fastq's that have been QC'ed and filtered for host / host food genomes
 first we will collapse them into sample groups (e.g. DNA_1, DNA_2)
 second we will remove duplicates (with 'fastq filter' program)
 third we will filter out reads with low-abundance kmers (with khmer program)
+3.5 we will put reads back into paired-end and single-end files
 fourth we will assemble each sample individually
 fifth we will run QC on each assembly
 sixth we will assemble the samples together
