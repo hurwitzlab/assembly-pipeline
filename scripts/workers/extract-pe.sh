@@ -35,9 +35,8 @@ echo Doing sample $SAMPLE
 set -x
 echo extracting pe
 time extract-paired-reads.py --gzip \
-    --output-dir $READY_DIR \
-    --output-paired "$SAMPLE".fastq.pe.gz \
-    --output-single "$SAMPLE".fastq.se.gz \
+    --output-paired $READY_DIR/"$SAMPLE".fastq.pe.gz \
+    --output-single $READY_DIR/"$SAMPLE".fastq.se.gz \
     "$SAMPLE".deduped.fastq.abundfilt
 
 echo Done at $(date)
