@@ -25,6 +25,8 @@ export DEDUPED_DIR="$PRJ_DIR/deduped"
 export TRIMMED_DIR="$PRJ_DIR/trimmed"
 #place to store gzipped paired-end / single-end reads that are ready for assembly
 export READY_DIR="$PRJ_DIR/ready"
+#place to store assembled contigs 
+export CONTIG_DIR="$PRJ_DIR/contigs"
 
 # Usefull functions
 # --------------------------------------------------

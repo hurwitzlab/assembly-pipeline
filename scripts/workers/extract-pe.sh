@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 #PBS -W group_list=bhurwitz
-#PBS -q qualified
+#PBS -q standard
 #PBS -l jobtype=cluster_only
 #PBS -l select=1:ncpus=2:mem=3gb:pcmem=2gb
 #PBS -l pvmem=6gb
