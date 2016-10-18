@@ -2,7 +2,9 @@
 
 #PBS -W group_list=bhurwitz
 #PBS -q qualified
-#PBS -l select=1:ncpus=1:mem=6gb
+#PBS -l jobtype=cluster_only
+#PBS -l select=1:ncpus=2:mem=3gb:pcmem=2gb
+#PBS -l pvmem=6gb
 ###and the amount of time required to run it
 #PBS -l walltime=2:00:00
 #PBS -l cput=2:00:00

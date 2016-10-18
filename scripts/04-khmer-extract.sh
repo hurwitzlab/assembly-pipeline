@@ -10,7 +10,7 @@ export CWD="$PWD"
 PROG=`basename $0 ".sh"`
 STDOUT_DIR="$CWD/out/$PROG"
 
-init_dir "$STDOUT_DIR"
+init_dir "$STDOUT_DIR" "$READY_DIR"
 
 for i in $SAMPLE_NAMES; do
     export SAMPLE=$i
