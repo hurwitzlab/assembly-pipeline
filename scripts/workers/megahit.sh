@@ -30,8 +30,8 @@ megahit \
     --num-cpu-threads 12 \
     --memory 0.9 \
     --presets meta-large \
-    --12 $READY_DIR/"$SAMPLE".fastq.pe.gz \
-    -r $READY_DIR/"$SAMPLE".fastq.pe.gz \
+    --12 $READY_DIR/"$SAMPLE".fastq.pe \
+    -r $READY_DIR/"$SAMPLE".fastq.se \
     -o $CONTIG_DIR/"$SAMPLE" \
     --out-prefix "$SAMPLE"
 
