@@ -1,10 +1,8 @@
 #!/usr/bin/env bash
 
 #PBS -W group_list=bhurwitz
-#PBS -q standard
-#PBS -l jobtype=cluster_only
-#PBS -l select=1:ncpus=2:mem=3gb:pcmem=2gb
-#PBS -l pvmem=6gb
+#PBS -q qualified
+#PBS -l select=1:ncpus=6:mem=36gb
 ###and the amount of time required to run it
 #PBS -l walltime=24:00:00
 #PBS -l cput=24:00:00
@@ -32,26 +30,27 @@ cd $TRIMMED_DIR
 
 echo Doing sample $SAMPLE
 
-set -x
-echo sorting pe
-time fastq-sort --id "$SAMPLE".deduped.fastq.abundfilt > "$SAMPLE".temp
-
-if [[ $? -eq 0 ]]; then
-    echo "..."
-else
-    echo Something went wrong with fastq-sort
-    exit 1
-fi
-
+#set -x
+#echo sorting pe
+###NOTE: sorted manually in interactive session to this isn't needed
+#time fastq-sort --id "$SAMPLE".deduped.fastq.abundfilt > "$SAMPLE".temp
+#
+#if [[ $? -eq 0 ]]; then
+#    mv "$SAMPLE".temp "$SAMPLE".deduped.fastq.abundfilt
+#else
+#    echo Something went wrong with fastq-sort
+#    exit 1
+#fi
+#
 
 echo extracting pe
-time extract-paired-reads.py --gzip \
-    --output-paired $READY_DIR/"$SAMPLE".fastq.pe.gz \
-    --output-single $READY_DIR/"$SAMPLE".fastq.se.gz \
-    "$SAMPLE".temp
+time extract-paired-reads.py \
+    --output-paired $READY_DIR/"$SAMPLE".fastq.pe \
+    --output-single $READY_DIR/"$SAMPLE".fastq.se \
+    "$SAMPLE".deduped.fastq.abundfilt
 
 if [[ $? -eq 0 ]]; then
-    rm "$SAMPLE".temp
+    echo 'It worked!'
 else
     echo Something went wrong with extract-paired-reads.py
 fi
