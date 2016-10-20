@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+
+#PBS -W group_list=bhurwitz
+#PBS -q qualified
+#PBS -j oe
+#PBS -o ./out/07-megahit-final/
+#PBS -l select=1:ncpus=12:mem=72gb
+###and the amount of time required to run it
+#PBS -l walltime=24:00:00
+#PBS -l cput=96:00:00
+#PBS -M scottdaniel@email.arizona.edu
+#PBS -m bea
+
+echo Started at $(date)
+
+if [ -n "$PBS_O_WORKDIR" ]; then
+    cd $PBS_O_WORKDIR
+fi
+
+set -u
+
+source ./config.sh
+
+COMMON="$WORKER_DIR/common.sh"
+
+if [ -e $COMMON ]; then
+  . "$COMMON"
+else
+  echo Missing common \"$COMMON\"
+  exit 1
+fi
+
+cd $CONTIG_DIR
+
+time megahit \
+    --num-cpu-threads 12 \
+    --memory 0.9 \
+    --presets meta-large \
+    -r DNA_1/DNA_1.contigs.fa,DNA_2/DNA_2.contigs.fa,DNA_3/DNA_3.contigs.fa,DNA_4/DNA_4.contigs.fa \
+    -o "$CONTIG_DIR"/all
+
+echo "Ended at $(date)"
