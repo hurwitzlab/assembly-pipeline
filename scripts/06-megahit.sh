@@ -11,11 +11,11 @@ PROG=`basename $0 ".sh"`
 STDOUT_DIR="$CWD/out/$PROG"
 
 init_dir "$STDOUT_DIR"
+init_dir "$CONTIG_DIR"
 
 for i in $SAMPLE_NAMES; do
     export SAMPLE=$i
     echo $i
-    init_dir "$CONTIG_DIR"/"$SAMPLE"
     qsub -V -j oe -o "$STDOUT_DIR" $WORKER_DIR/megahit.sh
 done
 

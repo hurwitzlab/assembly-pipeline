@@ -38,3 +38,6 @@ grouped/
 out/
 deduped/
 trimmed/
+contigs/
+ready/
+run_metaquast.sh
