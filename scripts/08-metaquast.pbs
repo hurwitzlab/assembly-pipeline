@@ -1,4 +1,4 @@
-#!usr/bin/env bash
+#!/usr/bin/env bash
 
 #PBS -W group_list=bhurwitz
 #PBS -q qualified
@@ -30,17 +30,23 @@ else
   exit 1
 fi
 
-mkdir -p $QUAST_DIR
-cd $QUAST_DIR
+if [ ! -d $QUAST_DIR ]; then
+    mkdir -p $QUAST_DIR
+fi
+
+cd $PRJ_DIR
 
 #metagenome gene finding
 #max threads is recommended to be 25% of max
 python $HOME/quast/metaquast.py \
+    -f --meta \
     -t 3 \
-    -l "DNA_1","DNA_2","DNA_3","DNA_4" \
+    -l "DNA_1","DNA_2","DNA_3","DNA_4","iterative_all","original_all" \
     $CONTIG_DIR/DNA_1/DNA_1.contigs.fa \
     $CONTIG_DIR/DNA_2/DNA_2.contigs.fa \
     $CONTIG_DIR/DNA_3/DNA_3.contigs.fa \
     $CONTIG_DIR/DNA_4/DNA_4.contigs.fa \
+    $CONTIG_DIR/all/final.contigs.fa \
+    $CONTIG_DIR/orginal_all/final.contigs.fa
 
 echo Done at $(date)

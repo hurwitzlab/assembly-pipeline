@@ -28,7 +28,7 @@ export READY_DIR="$PRJ_DIR/ready"
 #place to store assembled contigs 
 export CONTIG_DIR="$PRJ_DIR/contigs"
 #place to store quality reports from quast
-export QUAST_DIR="$PRJ_DIR/quast"
+export QUAST_DIR="$PRJ_DIR/quast_results"
 
 # Usefull functions
 # --------------------------------------------------

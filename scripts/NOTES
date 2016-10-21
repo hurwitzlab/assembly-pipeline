@@ -10,3 +10,7 @@ fourth we will assemble each sample individually
 fifth we will run QC on each assembly
 sixth we will assemble the samples together
 7th we will run QC on that co-assembly
+
+IMPORTANT NOTE:
+For the contigs/ directory, all is the contigs made from a megahit assembly run of DNA_1,2,3, and 4
+original_all/ is the old megahit run of just deduplicated fastq's that were not trimmed of low-abundance kmers 
