@@ -47,6 +47,6 @@ python $HOME/quast/metaquast.py \
     $CONTIG_DIR/DNA_3/DNA_3.contigs.fa \
     $CONTIG_DIR/DNA_4/DNA_4.contigs.fa \
     $CONTIG_DIR/all/final.contigs.fa \
-    $CONTIG_DIR/orginal_all/final.contigs.fa
+    $CONTIG_DIR/original_all/final.contigs.fa
 
 echo Done at $(date)
