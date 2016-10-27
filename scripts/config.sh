@@ -29,8 +29,8 @@ export TRIMMED_DIR="$PRJ_DIR/concat-trimmed"
 #export READY_DIR="$PRJ_DIR/ready"
 export READY_DIR="$PRJ_DIR/concat-ready"
 #place to store assembled contigs 
-#export CONTIG_DIR="$PRJ_DIR/contigs"
-export CONTIG_DIR="$PRJ_DIR/concat-contigs"
+export CONTIG_DIR="$PRJ_DIR/contigs"
+#export CONTIG_DIR="$PRJ_DIR/concat-contigs"
 #place to store quality reports from quast
 export QUAST_DIR="$PRJ_DIR/quast_results"
 #place to store alignment of original reads to contigs for calculation of depth
