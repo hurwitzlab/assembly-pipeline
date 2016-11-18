@@ -1,23 +1,34 @@
 #!/usr/bin/env bash
 #
-# Merge *.fastq's by sample before deduplication 
+# Merge low qual *.fastq's  before deduplication 
 #
+#PBS -W group_list=bhurwitz
+#PBS -q qualified
+#PBS -l select=1:ncpus=1:mem=6gb
+###and the amount of time required to run it
+#PBS -l walltime=24:00:00
+#PBS -l cput=24:00:00
+#PBS -M scottdaniel@email.arizona.edu
+#PBS -m bea
+
+echo Started at $(date)
 
 set -u
 source ./config.sh
 export CWD="$PWD"
-export STEP_SIZE=1
 
 PROG=`basename $0 ".sh"`
 STDOUT_DIR="$CWD/out/$PROG"
 
-init_dir "$STDOUT_DIR" "$GROUPED_DIR"
+init_dir "$STDOUT_DIR"
 
-cd "$SORTNMG_DIR"
+if [[ ! -d $GROUPED_DIR ]]; then
+    mkdir -p $GROUPED_DIR
+fi
 
-for i in $SAMPLE_NAMES; do
-    export SAMPLE=$i
-    echo $i
-    qsub -V -j oe -o "$STDOUT_DIR" $WORKER_DIR/cat_fastq.sh
-done
+cd "$LQ_DIR"
+
+time find ./ -type f -iname "*.fastq" -print0 | xargs -0 -I file cat file > $GROUPED_DIR/all-low-qual.fastq
+
+echo Done at $(date)
 
