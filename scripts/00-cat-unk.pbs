@@ -3,6 +3,8 @@
 # Merge unknown species *.fastq's  before deduplication 
 #
 #PBS -W group_list=bhurwitz
+#PBS -j oe
+#PBS -o ./out/
 #PBS -q qualified
 #PBS -l select=1:ncpus=1:mem=6gb
 ###and the amount of time required to run it
@@ -12,15 +14,9 @@
 #PBS -m bea
 
 echo Started at $(date)
-
+cd $PBS_O_WORKDIR
 set -u
 source ./config.sh
-export CWD="$PWD"
-
-PROG=`basename $0 ".sh"`
-STDOUT_DIR="$CWD/out/$PROG"
-
-init_dir "$STDOUT_DIR"
 
 if [[ ! -d $GROUPED_DIR ]]; then
     mkdir -p $GROUPED_DIR
