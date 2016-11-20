@@ -28,23 +28,13 @@ fi
 
 cd $GROUPED_DIR
 
-#export MERGER="$WORKER_DIR/mergeShuffledFastqSeqs.pl"
-
-echo Doing sample $SAMPLE
-
-#set -x
-
-#echo Concatenating all fastqs into temp file
-#time cat "$SAMPLE".1.fastq "$SAMPLE".2.fastq "$SAMPLE".nomatch.fastq > "$SAMPLE".temp
 echo Filtering out duplicate reads
-time fastq filter --adjust 64 --unique "$SAMPLE".temp \
-    > $DEDUPED_DIR/"$SAMPLE".deduped.fastq
+time fastq filter --unique $FILE_TO_DEDUP \
+    > $DEDUPED_DIR/deduped."$FILE_TO_DEDUP"
 if [[ $? -eq 0 ]]; then
-    echo Removing temp file
-    rm "$SAMPLE".temp
+    echo Yay, it worked
 else
     echo Something went wrong with fastq filter
-    echo Keeping temp file for another try
 fi
 
 echo Done at $(date)

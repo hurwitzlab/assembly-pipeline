@@ -3,25 +3,27 @@
 # deduplication of fastq reads
 #
 
+if [[ $# = 0 ]]; then
+    echo "Need to know what to deduplicate"
+    exit 1
+fi
+
 set -u
 source ./config.sh
 export CWD="$PWD"
-export STEP_SIZE=1
 
 PROG=`basename $0 ".sh"`
 STDOUT_DIR="$CWD/out/$PROG"
 
 init_dir "$STDOUT_DIR"
-#init_dir "$DEDUPED_DIR"
+
+if [[ ! -d $DEDUPED_DIR ]]; then
+    mkdir -p $DEDUPED_DIR
+fi
 
 cd "$GROUPED_DIR"
 
-#overriding config just this once
-export SAMPLE_NAMES="DNA_3"
+export FILE_TO_DEDUP=$1
 
-for i in $SAMPLE_NAMES; do
-    export SAMPLE=$i
-    echo $i
-    qsub -V -j oe -o "$STDOUT_DIR" $WORKER_DIR/dedup.sh
-done
+qsub -V -j oe -o "$STDOUT_DIR" $WORKER_DIR/dedup.sh
 
