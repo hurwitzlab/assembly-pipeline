@@ -23,6 +23,10 @@ export UNK_DIR="$SRC_DIR/unk-out2"
 
 #place to store cat'd fastqs 
 export GROUPED_DIR="$PRJ_DIR/concat"
+#name for concat'd low alignment score reads
+export LOWALN="all-low-qual.fastq"
+#name for concat'd unknown species reads
+export UNKSPEC="all-unk.fastq"
 #place to store deduped fastqs
 export DEDUPED_DIR="$PRJ_DIR/deduped"
 #will store graphs in $DEDUPED_DIR
