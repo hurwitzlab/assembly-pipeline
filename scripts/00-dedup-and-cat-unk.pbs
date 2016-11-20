@@ -19,7 +19,7 @@ init_dir "$STDOUT_DIR"
 
 cd "$UNK_DIR"
 
-DIRS_TO_DEDUP=$PRJ_DIR/dirs-to-dedup
+export DIRS_TO_DEDUP=$PRJ_DIR/dirs-to-dedup
 
 find ./ -type d | sed "s/^\.\///" > $DIRS_TO_DEDUP 
 
