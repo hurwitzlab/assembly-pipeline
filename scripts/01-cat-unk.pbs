@@ -6,7 +6,7 @@
 #PBS -j oe
 #PBS -o ./out/
 #PBS -q qualified
-#PBS -l select=1:ncpus=1:mem=96gb
+#PBS -l select=1:ncpus=1:mem=144gb
 ###and the amount of time required to run it
 #PBS -l walltime=24:00:00
 #PBS -l cput=24:00:00
@@ -28,7 +28,9 @@ cd "$UNK_DIR"
 
 echo Concatenating all those deduped temp files
 
-time find ./ -type f -iname "deduped.temp" -print0 | xargs -0 -I file cat file > $GROUPED_DIR/all-deduped.temp
+if [[ ! -e $GROUPED_DIR/all-deduped.temp ]]; then
+    time find ./ -type f -iname "deduped.temp" -print0 | xargs -0 -I file cat file > $GROUPED_DIR/all-deduped.temp
+fi
 
 echo Deduplicating once again
 
