@@ -9,6 +9,8 @@
 
 echo STARTED at $(date)
 
+set -u
+
 COMMON="$WORKER_DIR/common.sh"
 
 if [ -e $COMMON ]; then
@@ -18,9 +20,11 @@ else
   exit 1
 fi
 
-get_lines $DIRS_TO_PROCESS $DIRS_TO_DEDUP $PBS_ARRAY_INDEX $STEP_SIZE
+DIRS_TO_PROC=$(mktemp)
 
-NUM_FILES=$(lc $DIRS_TO_DEDUP)
+get_lines $DIRS_TO_DEDUP $DIRS_TO_PROC $PBS_ARRAY_INDEX $STEP_SIZE
+
+NUM_FILES=$(lc $DIRS_TO_PROC)
 
 echo Found \"$NUM_FILES\" files to process
 
