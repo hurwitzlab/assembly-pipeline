@@ -44,3 +44,4 @@ run_metaquast.sh
 quast_results/
 concat/
 aligned/
+dirs-to-dedup
