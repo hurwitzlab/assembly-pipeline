@@ -1,9 +1,9 @@
 # already in config.sh
 # --------------------------------------------------
-#function lc() {
-#    wc -l $1 | cut -d ' ' -f 1
-#}
-#
+function lc() {
+    wc -l $1 | cut -d ' ' -f 1
+}
+
 # --------------------------------------------------
 function get_lines() {
   FILE=$1
