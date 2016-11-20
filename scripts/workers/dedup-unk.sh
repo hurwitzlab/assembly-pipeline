@@ -1,6 +1,6 @@
 #PBS -W group_list=bhurwitz
 #PBS -q qualified
-#PBS -l select=1:ncpus=6:mem=36gb
+#PBS -l select=1:ncpus=12:mem=96gb
 ###and the amount of time required to run it
 #PBS -l walltime=24:00:00
 #PBS -l cput=24:00:00
@@ -28,7 +28,7 @@ NUM_FILES=$(lc $DIRS_TO_PROC)
 
 echo Found \"$NUM_FILES\" files to process
 
-for DIR in $(cat $DIRS_TO_DEDUP); do
+for DIR in $(cat $DIRS_TO_PROC); do
 
     echo Working on $DIR
 
