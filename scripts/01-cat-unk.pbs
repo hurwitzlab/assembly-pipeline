@@ -28,8 +28,7 @@ cd "$UNK_DIR"
 
 echo Concatenating all those deduped temp files
 
-time find ./ -type f -iname "deduped.temp" -print0 | xargs -0 -I file cat file >
-    $GROUPED_DIR/all-deduped.temp
+time find ./ -type f -iname "deduped.temp" -print0 | xargs -0 -I file cat file > $GROUPED_DIR/all-deduped.temp
 
 echo Deduplicating once again
 
