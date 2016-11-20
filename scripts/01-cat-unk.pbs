@@ -6,10 +6,10 @@
 #PBS -j oe
 #PBS -o ./out/
 #PBS -q qualified
-#PBS -l select=1:ncpus=1:mem=144gb
+#PBS -l select=1:ncpus=1:mem=216gb
 ###and the amount of time required to run it
-#PBS -l walltime=24:00:00
-#PBS -l cput=24:00:00
+#PBS -l walltime=6:00:00
+#PBS -l cput=6:00:00
 #PBS -M scottdaniel@email.arizona.edu
 #PBS -m bea
 
