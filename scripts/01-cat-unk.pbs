@@ -1,23 +1,48 @@
 #!/usr/bin/env bash
 #
-# Merge *.fastq's by sample before deduplication 
+# Merge unk deduped.temp from unaligned.fastqs  before deduplication (again)
 #
+#PBS -W group_list=bhurwitz
+#PBS -j oe
+#PBS -o ./out/
+#PBS -q qualified
+#PBS -l select=1:ncpus=1:mem=96gb
+###and the amount of time required to run it
+#PBS -l walltime=24:00:00
+#PBS -l cput=24:00:00
+#PBS -M scottdaniel@email.arizona.edu
+#PBS -m bea
+
+echo Started at $(date)
+
+cd $PBS_O_WORKDIR
 
 set -u
 source ./config.sh
-export CWD="$PWD"
-export STEP_SIZE=1
 
-PROG=`basename $0 ".sh"`
-STDOUT_DIR="$CWD/out/$PROG"
+if [[ ! -d $GROUPED_DIR ]]; then
+    mkdir -p $GROUPED_DIR
+fi
 
-init_dir "$STDOUT_DIR" "$GROUPED_DIR"
+cd "$UNK_DIR"
 
-cd "$SORTNMG_DIR"
+echo Concatenating all those deduped temp files
 
-for i in $SAMPLE_NAMES; do
-    export SAMPLE=$i
-    echo $i
-    qsub -V -j oe -o "$STDOUT_DIR" $WORKER_DIR/cat_fastq.sh
-done
+time find ./ -type f -iname "deduped.temp" -print0 | xargs -0 -I file cat file >
+    $GROUPED_DIR/all-deduped.temp
+
+echo Deduplicating once again
+
+time fastq filter --unique $GROUPED_DIR/all-deduped.temp \
+    > $GROUPED_DIR/$UNKSPEC
+
+if [[ $? = 0 ]]; then #no error in fastq filter
+    if [[ ! -z $GROUPED_DIR/$UNKSPEC ]]; then #and output is not zero-length
+        echo Looks like things worked
+        echo Removing temp file 
+        rm $GROUPED_DIR/all-deduped.temp
+    fi
+fi
+
+echo DONE at $(date)
 
