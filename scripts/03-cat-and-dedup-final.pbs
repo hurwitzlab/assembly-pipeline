@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+#
+# Merge everything and deduplicate
+#
+#PBS -W group_list=bhurwitz
+#PBS -j oe
+#PBS -o ./out/
+#PBS -q standard
+###PBS -l select=1:ncpus=12:mem=72gb:pcmem=6gb
+
+###TIL: quad48a / pcmem=42gb have to use -q standard
+#PBS -l select=1:ncpus=12:mem=504gb:pcmem=42gb
+
+#PBS -l walltime=6:00:00
+#PBS -l cput=6:00:00
+#PBS -M scottdaniel@email.arizona.edu
+#PBS -m bea
+
+echo Started at $(date)
+
+cd $PBS_O_WORKDIR
+
+set -u
+source ./config.sh
+
+cd "$GROUPED_DIR"
+
+if [[ ! -e all.temp ]]; then
+
+    echo Concatenating all those deduped temp files
+
+    find ./ -iname "*.2out" -print0 | xargs -0 -I file cat file > all.temp
+
+fi
+
+echo Deduplicating once again
+
+time fastq filter --unique all.temp > $DEDUPED_DIR/all-deduped.fastq
+
+if [[ $? = 0 ]]; then #no error in fastq filter
+    if [[ ! -z $DEDUPED_DIR/all-deduped.fastq ]]; then #and output is not zero-length
+        echo Looks like things worked
+        echo Removing temp file 
+        rm $GROUPED_DIR/all.temp
+    fi
+fi
+
+echo DONE at $(date)
+
