@@ -19,21 +19,21 @@ init_dir "$STDOUT_DIR"
 
 cd "$UNK_DIR"
 
-export DIRS_TO_DEDUP=$PRJ_DIR/dirs-to-dedup
+export FILES_TO_DEDUP=$PRJ_DIR/files-to-dedup
 
-find ./ -type d | sed "s/^\.\///" > $DIRS_TO_DEDUP 
+find ./ -type f -iname "deduped.temp" | sed "s/^\.\///" | sort > $FILES_TO_DEDUP 
 
-NUM_DIRS=$(lc $DIRS_TO_DEDUP)
+NUM_FILES=$(lc $FILES_TO_DEDUP)
 
-if [[ $NUM_DIRS = 0 ]]; then
-    echo No dirs found
+if [[ $NUM_FILES = 0 ]]; then
+    echo No files found
     exit 1
 else
-    echo Found "$NUM_DIRS"
+    echo Found "$NUM_FILES"
     echo splitting them up in subjobs of "$STEP_SIZE"
 fi
 
-JOB=$(qsub -J 1-$NUM_DIRS:$STEP_SIZE -V -N dedup-unk -j oe -o "$STDOUT_DIR" $WORKER_DIR/dedup-unk.sh)
+JOB=$(qsub -J 1-$NUM_FILES:$STEP_SIZE -V -N dedup-unk -j oe -o "$STDOUT_DIR" $WORKER_DIR/dedup-unk2.sh)
 
 if [ $? -eq 0 ]; then
     echo Submitted job \"$JOB\" for you in steps of \"$STEP_SIZE.\" Remember: time you enjoy wasting is not wasted time.

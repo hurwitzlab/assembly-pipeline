@@ -45,3 +45,4 @@ quast_results/
 concat/
 aligned/
 dirs-to-dedup
+files-to-dedup
