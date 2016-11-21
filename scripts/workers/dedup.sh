@@ -30,7 +30,7 @@ cd $GROUPED_DIR
 
 echo Filtering out duplicate reads
 time fastq filter --unique $FILE_TO_DEDUP \
-    > $DEDUPED_DIR/deduped."$FILE_TO_DEDUP"
+    > $GROUPED_DIR/deduped."$FILE_TO_DEDUP".2out
 if [[ $? -eq 0 ]]; then
     echo Yay, it worked
 else
