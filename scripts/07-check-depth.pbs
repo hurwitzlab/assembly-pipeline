@@ -11,7 +11,8 @@
 #PBS -W group_list=bhurwitz
 #PBS -q qualified
 #PBS -j oe
-#PBS -o ./out/09-checkdepth/
+#PBS -N 07-checkdepth
+#PBS -o ./out/
 #PBS -l select=1:ncpus=12:mem=72gb
 ###and the amount of time required to run it
 #PBS -l walltime=24:00:00

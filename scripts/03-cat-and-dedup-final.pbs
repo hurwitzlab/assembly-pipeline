@@ -4,6 +4,7 @@
 #
 #PBS -W group_list=bhurwitz
 #PBS -j oe
+#PBS -N 03-cat-and-dedup-final
 #PBS -o ./out/
 #PBS -q standard
 ###PBS -l select=1:ncpus=12:mem=72gb:pcmem=6gb

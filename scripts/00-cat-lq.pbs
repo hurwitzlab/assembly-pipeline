@@ -4,6 +4,7 @@
 #
 #PBS -W group_list=bhurwitz
 #PBS -j oe
+#PBS -N 00-cat-lq
 #PBS -o ./out/
 #PBS -q qualified
 #PBS -l select=1:ncpus=1:mem=6gb
