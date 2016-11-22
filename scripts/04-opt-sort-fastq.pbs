@@ -27,11 +27,7 @@ fi
 
 cd "$DEDUPED_DIR"
 
-cat $DEDUPED_DIR/all-deduped.fastq \
-| paste - - - - \
-| sort -k1,1 -S 3G \
-| tr '\t' '\n' \
-| > $SORTED_DIR/sorted-all-deduped.fastq
+cat $DEDUPED_DIR/all-deduped.fastq | paste - - - - | sort -k1,1 -S 70G | tr '\t' '\n' > $SORTED_DIR/sorted-all-deduped.fastq
 
 echo Done at $(date)
 
