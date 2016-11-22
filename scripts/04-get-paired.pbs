@@ -26,7 +26,7 @@ fi
 
 cd "$DEDUPED_DIR"
 
-extract-paired-reads.py -d $READY_DIR --gzip all.deduped.fastq
+extract-paired-reads.py -d $READY_DIR --gzip $DEDUPED_DIR/all-deduped.fastq
 
 echo Done at $(date)
 
