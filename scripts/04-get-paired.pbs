@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+#
+# Merge low qual *.fastq's  before deduplication 
+#
+#PBS -W group_list=bhurwitz
+#PBS -j oe
+#PBS -o ./out/
+#PBS -q qualified
+#PBS -l select=1:ncpus=1:mem=6gb
+###and the amount of time required to run it
+#PBS -l walltime=24:00:00
+#PBS -l cput=24:00:00
+#PBS -M scottdaniel@email.arizona.edu
+#PBS -m bea
+
+echo Started at $(date)
+
+cd $PBS_O_WORKDIR
+
+set -u
+source ./config.sh
+
+if [[ ! -d $GROUPED_DIR ]]; then
+    mkdir -p $GROUPED_DIR
+fi
+
+cd "$LQ_DIR"
+
+time find ./ -type f -iname "*.fastq" -print0 | xargs -0 -I file cat file > $GROUPED_DIR/all-low-qual.fastq
+
+echo Done at $(date)
+
