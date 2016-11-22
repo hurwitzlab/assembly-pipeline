@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 #
-# Merge low qual *.fastq's  before deduplication 
+# Get paired and single reads from the deduped fastq's
 #
 #PBS -W group_list=bhurwitz
 #PBS -j oe
 #PBS -o ./out/
 #PBS -q qualified
-#PBS -l select=1:ncpus=1:mem=6gb
+#PBS -l select=1:ncpus=12:mem=72gb
 ###and the amount of time required to run it
 #PBS -l walltime=24:00:00
 #PBS -l cput=24:00:00
@@ -20,13 +20,13 @@ cd $PBS_O_WORKDIR
 set -u
 source ./config.sh
 
-if [[ ! -d $GROUPED_DIR ]]; then
-    mkdir -p $GROUPED_DIR
+if [[ ! -d $READY_DIR ]]; then
+    mkdir -p $READY_DIR
 fi
 
-cd "$LQ_DIR"
+cd "$DEDUPED_DIR"
 
-time find ./ -type f -iname "*.fastq" -print0 | xargs -0 -I file cat file > $GROUPED_DIR/all-low-qual.fastq
+extract-paired-reads.py -d $READY_DIR --gzip all.deduped.fastq
 
 echo Done at $(date)
 
