@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 #
-# Get paired and single reads from the deduped fastq's
+# Sort fastq for extract-paired-reads.py
 #
 #PBS -W group_list=bhurwitz
 #PBS -j oe
-#PBS -N 04-get-paired
+#PBS -N 04-opt-sort-fastq
 #PBS -o ./out/
 #PBS -q qualified
 #PBS -l select=1:ncpus=12:mem=72gb
@@ -21,13 +21,17 @@ cd $PBS_O_WORKDIR
 set -u
 source ./config.sh
 
-if [[ ! -d $READY_DIR ]]; then
-    mkdir -p $READY_DIR
+if [[ ! -d $SORTED_DIR ]]; then
+    mkdir -p $SORTED_DIR
 fi
 
 cd "$DEDUPED_DIR"
 
-extract-paired-reads.py -f -d $SORTED_DIR --gzip $DEDUPED_DIR/sorted-all-deduped.fastq
+cat $DEDUPED_DIR/all-deduped.fastq \
+| paste - - - - \
+| sort -k1,1 -S 3G \
+| tr '\t' '\n' \
+| > $SORTED_DIR/sorted-all-deduped.fastq
 
 echo Done at $(date)
 

@@ -31,6 +31,9 @@ export UNKSPEC="all-unk.fastq"
 export DEDUPED_DIR="$PRJ_DIR/deduped"
 #will store graphs in $DEDUPED_DIR
 
+#place for sorted fastq (since extract-paired-reads.py needs that)
+export SORTED_DIR="$PRJ_DIR/sorted"
+
 #place for fastqs ready to assembly
 export READY_DIR="$PRJ_DIR/ready"
 #place to store assembled contigs 
