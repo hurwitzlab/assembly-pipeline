@@ -25,9 +25,23 @@ if [[ ! -d $READY_DIR ]]; then
     mkdir -p $READY_DIR
 fi
 
-cd "$DEDUPED_DIR"
+cd "$SORTED_DIR"
 
-extract-paired-reads.py -f -d $SORTED_DIR --gzip $DEDUPED_DIR/sorted-all-deduped.fastq
+#going to try the perl script this time and see if its faster
+#this takes 7.5 hours
+#extract-paired-reads.py -f -d $READY_DIR --gzip $SORTED_DIR/sorted-all-deduped.fastq
+
+#already done interactively i hope
+#echo Have to split up the interleaved reads again ja ja ja
+#time cat sorted-all-deduped.fastq | paste - - - - | egrep '@.*\/1.*' | tr '\t' '\n' > sorted-all-deduped.1
+#time cat sorted-all-deduped.fastq | paste - - - - | egrep '@.*\/2.*' | tr '\t' '\n' > sorted-all-deduped.2
+
+echo Ok now run the perl script to merge and shuffle cha cha cha
+time $WORKER_DIR/mergeShuffledFastqSeqs.pl \
+    -f1 sorted-all-deduped.1 \
+    -f2 sorted-all-deduped.2 \
+    -r '^@(\S+)/[1|2]$' \
+    -o $READY_DIR/assemble-me
 
 echo Done at $(date)
 

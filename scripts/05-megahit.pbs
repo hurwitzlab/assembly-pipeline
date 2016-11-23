@@ -31,13 +31,15 @@ else
   exit 1
 fi
 
-cd $CONTIG_DIR
+cd $READY_DIR
 
 time megahit \
     --num-cpu-threads 12 \
     --memory 0.9 \
     --presets meta-large \
-    -r DNA_1/DNA_1.contigs.fa,DNA_2/DNA_2.contigs.fa,DNA_3/DNA_3.contigs.fa,DNA_4/DNA_4.contigs.fa \
-    -o "$CONTIG_DIR"/all
+    --out-prefix unknown \
+    --12 sorted-all-deduped.fastq.pe \
+    -r sorted-all-deduped.fastq.se \
+    -o "$CONTIG_DIR"
 
 echo "Ended at $(date)"
