@@ -22,6 +22,9 @@
 
 
 echo Started at $(date)
+PROG=$(basename $0 ".pbs")
+
+echo Name of script is "$PROG"
 
 if [ -n "$PBS_O_WORKDIR" ]; then
     cd $PBS_O_WORKDIR
@@ -44,13 +47,12 @@ if [ ! -d $ALIGN_DIR ]; then
     mkdir -p $ALIGN_DIR
 fi
 
-cd $DEDUPED_DIR
+cd $READY_DIR
 
 printf "\nDoing bbmap...\n\n"
 
-$HOME/bin/bbmap/bbwrap.sh ref=$CONTIG_DIR/original_all/final.contigs.fa \
-    in=./all_dedup.1.fastq,./final_unpaired_dedup.fastq \
-    in2=./all_dedup.2.fastq \
+$HOME/bin/bbmap/bbwrap.sh ref=$CONTIG_DIR/unknown/unknown.contigs.fa \
+    in=./assemble-me.merged.fastq,./assemble-me.nomatch1.fastq,./assemble-me.nomatch2.fastq \
     out=$ALIGN_DIR/aln.sam.gz \
     kfilter=22 \
     subfilter=15 \
