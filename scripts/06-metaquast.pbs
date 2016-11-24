@@ -14,6 +14,10 @@
 
 echo Started at $(date)
 
+PROG=`basename $0 ".sh"`
+
+echo Name of script is "$PROG"
+
 if [ -n "$PBS_O_WORKDIR" ]; then
     cd $PBS_O_WORKDIR
 fi
