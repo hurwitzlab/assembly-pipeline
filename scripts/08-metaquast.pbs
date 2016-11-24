@@ -41,12 +41,13 @@ cd $PRJ_DIR
 python $HOME/quast/metaquast.py \
     -f --meta \
     -t 3 \
-    -l "DNA_1","DNA_2","DNA_3","DNA_4","iterative_all","original_all" \
+    -l "DNA_1","DNA_2","DNA_3","DNA_4","iterative_all","original_all","unknown" \
     $CONTIG_DIR/DNA_1/DNA_1.contigs.fa \
     $CONTIG_DIR/DNA_2/DNA_2.contigs.fa \
     $CONTIG_DIR/DNA_3/DNA_3.contigs.fa \
     $CONTIG_DIR/DNA_4/DNA_4.contigs.fa \
     $CONTIG_DIR/all/final.contigs.fa \
-    $CONTIG_DIR/original_all/final.contigs.fa
+    $CONTIG_DIR/original_all/final.contigs.fa \
+    $CONTIG_DIR/unknown/unknown.contigs.fa
 
 echo Done at $(date)
