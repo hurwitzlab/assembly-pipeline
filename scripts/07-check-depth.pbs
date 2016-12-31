@@ -51,7 +51,7 @@ cd $READY_DIR
 
 printf "\nDoing bbmap...\n\n"
 
-$HOME/bin/bbmap/bbwrap.sh ref=$CONTIG_DIR/unknown/unknown.contigs.fa \
+$HOME/bin/bbmap/bbwrap.sh ref=$CONTIG_DIR/unknown.contigs.fa \
     in=./assemble-me.merged.fastq,./assemble-me.nomatch1.fastq,./assemble-me.nomatch2.fastq \
     out=$ALIGN_DIR/aln.sam.gz \
     kfilter=22 \
