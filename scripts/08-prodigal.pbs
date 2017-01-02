@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+
+#PBS -W group_list=bhurwitz
+#PBS -q qualified
+#PBS -j oe
+#PBS -N 08-prodigal
+#PBS -o ./out/
+#PBS -l select=1:ncpus=12:mem=72gb
+###and the amount of time required to run it
+#PBS -l walltime=24:00:00
+#PBS -l cput=96:00:00
+#PBS -M scottdaniel@email.arizona.edu
+#PBS -m bea
+
+
+echo Started at $(date)
+PROG=$(basename $0 ".pbs")
+
+echo Name of script is "$PROG"
+
+if [ -n "$PBS_O_WORKDIR" ]; then
+    cd $PBS_O_WORKDIR
+fi
+
+set -u
+
+source ./config.sh
+
+COMMON="$WORKER_DIR/common.sh"
+
+if [ -e $COMMON ]; then
+  . "$COMMON"
+else
+  echo Missing common \"$COMMON\"
+  exit 1
+fi
+
+cd $CONTIG_DIR
+
+printf "\nDoing prodigal...\n\n"
+
+#TODO:prodigal stuff here
+
+echo Done at $(date)
