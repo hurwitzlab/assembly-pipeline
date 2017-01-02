@@ -38,6 +38,8 @@ export SORTED_DIR="$PRJ_DIR/sorted"
 export READY_DIR="$PRJ_DIR/ready"
 #place to store assembled contigs 
 export CONTIG_DIR="$PRJ_DIR/contigs"
+#place to store prodigal output (i.e. genes)
+export PROD_DIR="$PRJ_DIR/prodigal_out"
 
 #place to store quality reports from quast
 #will use old "assembly-pipeline" dir because that will allows us to compare

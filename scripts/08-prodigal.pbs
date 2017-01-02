@@ -37,8 +37,18 @@ fi
 
 cd $CONTIG_DIR
 
+if [[ ! -d $PROD_DIR ]];
+    mkdir -p $PROD_DIR
+fi
+
 printf "\nDoing prodigal...\n\n"
 
-#TODO:prodigal stuff here
+INPUT="unknown.contigs.fa"
+
+PREFIX="$PROD_DIR"/"$INPUT"
+    
+prodigal -d "$PREFIX"-prodigal.fa -o "$PREFIX"-prodigal.gbk -i $INPUT
+
+sed -i s/" #.*"// "$PREFIX"-prodigal.fa
 
 echo Done at $(date)
