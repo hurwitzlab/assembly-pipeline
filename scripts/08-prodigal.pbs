@@ -43,7 +43,10 @@ fi
 
 printf "\nDoing prodigal...\n\n"
 
-INPUT="unknown.contigs.fa"
+ORIG="unknown.contigs.fa"
+INPUT="contigs-longer-than-1000.fa"
+
+anvi-script-remove-short-contigs-from-fasta -l 1000 -o $INPUT $ORIG
 
 PREFIX="$PROD_DIR"/"$INPUT"
     
