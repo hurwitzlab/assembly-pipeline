@@ -1,0 +1,55 @@
+#!/usr/bin/env bash
+
+#PBS -W group_list=bhurwitz
+#PBS -q qualified
+#PBS -j oe
+#PBS -N 09-rast
+#PBS -o ./out/
+#PBS -l select=1:ncpus=1:mem=5gb
+###and the amount of time required to run it
+#PBS -l walltime=72:00:00
+#PBS -l cput=72:00:00
+#PBS -M scottdaniel@email.arizona.edu
+#PBS -m bea
+
+
+echo Started at $(date)
+PROG=$(basename $0 ".pbs")
+
+echo Name of script is "$PROG"
+
+if [ -n "$PBS_O_WORKDIR" ]; then
+    cd $PBS_O_WORKDIR
+fi
+
+set -u
+
+source ./config.sh
+
+COMMON="$WORKER_DIR/common.sh"
+
+if [ -e $COMMON ]; then
+  . "$COMMON"
+else
+  echo Missing common \"$COMMON\"
+  exit 1
+fi
+
+cd $PROD_DIR
+
+printf "\nDoing rast...\n\n"
+
+PROD="contigs-longer-than-1000.fa-prodigal.fa"
+
+#options as suggested by Rast website for metagenomic samples
+#http://blog.theseed.org/servers/2010/09/an-etude-relating-to-a-metagenomics-sample.html
+
+svr_assign_to_dna_using_figfams \
+    -kmer 9 \
+    -maxGap 300 \
+    -minSize 54 \
+    -reliability 3 \
+    < $PROD \
+    > myrast_annotation.txt
+
+echo Done at $(date)
