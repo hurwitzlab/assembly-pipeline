@@ -34,15 +34,22 @@ Out of memory!**
 **split the contigs-longer-than-1000.fa into two files**
 
 split -n l/2 contigs-longer-than-1000.fa
+
 mv xab onethous-part1.fa
+
 mv xaa onethous-part2.fa
 
 and then do the following for each:
 rast-create-genome
+
 rast-call-features-CDS-prodigal
+
 rast-annotate-proteins-kmer-v2
+
 rast-annotate-proteins-kmer-v1 -H
+
 rast-resolve-overlapping-features
+
 rast-export-genome gff
 
 and then just "cat part1.gff part2.gff > contigs-longer-than-1000.gff"
