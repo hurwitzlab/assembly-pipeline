@@ -48,3 +48,4 @@ dirs-to-dedup
 files-to-dedup
 sorted/
 prodigal_out/
+gff/
